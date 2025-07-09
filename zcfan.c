@@ -38,7 +38,7 @@
 #define S_CONFIG_MAX_STRLEN STR(CONFIG_MAX_STRLEN)
 
 /* Must be highest to lowest temp */
-enum FanLevel { FAN_MAX, FAN_MED, FAN_LOW, FAN_OFF, FAN_INVALID };
+enum FanLevel { FAN_MAX, FAN_MED_2, FAN_MED_1, FAN_LOW, FAN_OFF, FAN_INVALID };
 struct Rule {
     char tpacpi_level[CONFIG_MAX_STRLEN + 1];
     int threshold;
@@ -46,7 +46,8 @@ struct Rule {
 };
 static struct Rule rules[] = {
     [FAN_MAX] = {"full-speed", 90, "maximum"},
-    [FAN_MED] = {"4", 80, "medium"},
+    [FAN_MED_2] = {"7", 85, "medium"},
+    [FAN_MED_1] = {"4", 80, "medium"},
     [FAN_LOW] = {"1", 70, "low"},
     [FAN_OFF] = {"0", TEMP_MIN, "off"},
 };
@@ -311,12 +312,16 @@ static void get_config(void) {
         int ch;
         expect(pos >= 0);
         fscanf_int_for_key(f, pos, "max_temp", rules[FAN_MAX].threshold);
-        fscanf_int_for_key(f, pos, "med_temp", rules[FAN_MED].threshold);
+        fscanf_int_for_key(f, pos, "med_2_temp", rules[FAN_MED_2].threshold);
+        fscanf_int_for_key(f, pos, "med_1_temp", rules[FAN_MED_1].threshold);
         fscanf_int_for_key(f, pos, "low_temp", rules[FAN_LOW].threshold);
         fscanf_int_for_key(f, pos, "watchdog_secs", watchdog_secs);
         fscanf_int_for_key(f, pos, "temp_hysteresis", temp_hysteresis);
         fscanf_str_for_key(f, pos, "max_level", rules[FAN_MAX].tpacpi_level);
-        fscanf_str_for_key(f, pos, "med_level", rules[FAN_MED].tpacpi_level);
+        fscanf_str_for_key(f, pos, "med_2_level",
+                           rules[FAN_MED_2].tpacpi_level);
+        fscanf_str_for_key(f, pos, "med_1_level",
+                           rules[FAN_MED_1].tpacpi_level);
         fscanf_str_for_key(f, pos, "low_level", rules[FAN_LOW].tpacpi_level);
         if (ftell(f) == pos) {
             while ((ch = fgetc(f)) != EOF && ch != '\n') {}
