@@ -10,8 +10,9 @@
 #include <unistd.h>
 
 #define MILLIC_TO_C(n) (n / 1000)
-#define TEMP_FILES_GLOB "/sys/class/hwmon/hwmon*/temp*_input"
-#define FAN_CONTROL_FILE "/proc/acpi/ibm/fan"
+#define TEMP_FILES_GLOB                                                        \
+    "/sys/class/hwmon/hwmon*/temp*_input"     // Gets the temperatures
+#define FAN_CONTROL_FILE "/proc/acpi/ibm/fan" // controls the fan speed
 #define TEMP_INVALID INT_MIN
 #define TEMP_MIN INT_MIN + 1
 #define NS_IN_SEC 1000000000L  // 1 second in nanoseconds
@@ -45,10 +46,10 @@ struct Rule {
     const char *name;
 };
 static struct Rule rules[] = {
-    [FAN_MAX] = {"full-speed", 90, "maximum"},
-    [FAN_MED_2] = {"7", 85, "medium 2"},
-    [FAN_MED_1] = {"4", 80, "medium 1"},
-    [FAN_LOW] = {"1", 70, "low"},
+    [FAN_MAX] = {"full-speed", 87, "maximum"},
+    [FAN_MED_2] = {"7", 80, "medium 2"},
+    [FAN_MED_1] = {"5", 75, "medium 1"},
+    [FAN_LOW] = {"auto", 55, "low"},
     [FAN_OFF] = {"0", TEMP_MIN, "off"},
 };
 

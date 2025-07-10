@@ -19,10 +19,10 @@ zcfan has the following default fan states:
 
 | Config name | thinkpad_acpi fan level           | Default trip temperature (C) |
 |-------------|-----------------------------------|------------------------------|
-| max_temp    | full-speed (or 7 if unsupported)  | 90                           |
-| med_2_temp  | 7                                 | 85                           |
-| med_1_temp  | 4                                 | 80                           |
-| low_temp    | 1                                 | 70                           |
+| max_temp    | full-speed (or 7 if unsupported)  | 87                           |
+| med_2_temp  | 7                                 | 80                           |
+| med_1_temp  | 5                                 | 75                           |
+| low_temp    | auto                              | 55                           |
 
 If no trip temperature is reached, the fan will be turned off.
 
@@ -30,10 +30,10 @@ The fan will also only be reduced once the temperature is now at least 10C
 below the trip temperature for the current fan state. This can be tuned with
 the config parameter `temp_hysteresis`.
 
-To override these defaults, you can place a file at `/etc/zcfan.conf` with
+To override these defaults, you can override the file at `/etc/zcfan.conf` with
 updated trip temperatures in degrees celsius and/or fan levels. As an example:
 
-    max_temp 85
+    max_temp 90
     med_2_temp 80
     med_1_temp 70
     low_temp 55

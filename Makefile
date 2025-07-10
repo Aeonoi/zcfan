@@ -5,6 +5,7 @@ SOURCES=$(wildcard *.c)
 EXECUTABLES=$(patsubst %.c,%,$(SOURCES))
 
 INSTALL:=install
+configdir:=/etc/
 prefix:=/usr/local
 bindir:=$(prefix)/bin
 datarootdir:=$(prefix)/share
@@ -47,6 +48,7 @@ clang-tidy:
 install: all
 	mkdir -p $(DESTDIR)$(bindir)/
 	$(INSTALL) -pt $(DESTDIR)$(bindir)/ $(EXECUTABLES)
+	$(INSTALL) -Dp -m 644 zcfan.conf $(DESTDIR)$(CONFIGDIR)/zcfan.conf
 	$(INSTALL) -Dp -m 644 $(SERVICE) $(DESTDIR)$(prefix)/lib/systemd/system/$(SERVICE)
 	$(INSTALL) -Dp -m 644 zcfan-sleep.service $(DESTDIR)$(prefix)/lib/systemd/system/zcfan-sleep.service
 	$(INSTALL) -Dp -m 644 zcfan-resume.service $(DESTDIR)$(prefix)/lib/systemd/system/zcfan-resume.service
