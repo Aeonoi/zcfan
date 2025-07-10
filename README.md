@@ -4,7 +4,7 @@ Zero-configuration fan control daemon for ThinkPads.
 
 ## Features
 
-- Extremely small (~250 lines), simple, and easy to understand code
+- Extremely small (~430 lines), simple, and easy to understand code
 - Sensible out of the box, configuration is optional (see "usage" below)
 - Strong focus on stopping the fan as soon as safe to do so, without inducing
   throttling
@@ -12,7 +12,6 @@ Zero-configuration fan control daemon for ThinkPads.
   levels
 - Watchdog support
 - Minimal resource usage
-- No dependencies
 
 ## Usage
 
@@ -21,7 +20,8 @@ zcfan has the following default fan states:
 | Config name | thinkpad_acpi fan level           | Default trip temperature (C) |
 |-------------|-----------------------------------|------------------------------|
 | max_temp    | full-speed (or 7 if unsupported)  | 90                           |
-| med_temp    | 4                                 | 80                           |
+| med_2_temp  | 7                                 | 85                           |
+| med_1_temp  | 4                                 | 80                           |
 | low_temp    | 1                                 | 70                           |
 
 If no trip temperature is reached, the fan will be turned off.
@@ -34,12 +34,14 @@ To override these defaults, you can place a file at `/etc/zcfan.conf` with
 updated trip temperatures in degrees celsius and/or fan levels. As an example:
 
     max_temp 85
-    med_temp 70
+    med_2_temp 80
+    med_1_temp 70
     low_temp 55
     temp_hysteresis 20
 
     max_level full-speed
-    med_level 4
+    med_2_level 7
+    med_1_level 4
     low_level 1
 
 ### Hysteresis
@@ -60,6 +62,10 @@ much for my tastes. Use whichever suits your needs.
 ## Compilation
 
 Run `make`.
+
+### Dependencies
+
+Requires ``gcc`` and ``make``
 
 ## Installation
 

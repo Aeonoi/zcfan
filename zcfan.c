@@ -46,8 +46,8 @@ struct Rule {
 };
 static struct Rule rules[] = {
     [FAN_MAX] = {"full-speed", 90, "maximum"},
-    [FAN_MED_2] = {"7", 85, "medium"},
-    [FAN_MED_1] = {"4", 80, "medium"},
+    [FAN_MED_2] = {"7", 85, "medium 2"},
+    [FAN_MED_1] = {"4", 80, "medium 1"},
     [FAN_LOW] = {"1", 70, "low"},
     [FAN_OFF] = {"0", TEMP_MIN, "off"},
 };
